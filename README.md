@@ -1,2 +1,2 @@
-# corona-map-visualizer
-Corona Virus Map Visualizer
+# Corona Virus Map Visualizer
+

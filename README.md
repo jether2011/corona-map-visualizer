@@ -15,6 +15,6 @@ https://jether2011.github.io/covid19-map-visualizer/
 
 **Note: Source 2 is the default source now if not mentioned**
 
-## Screenshot
+# Screenshot
 
 ![Preview](./preview.png)

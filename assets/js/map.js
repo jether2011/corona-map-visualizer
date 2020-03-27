@@ -6,7 +6,7 @@ $( document ).ready(function() {
 });
 
 function initMap() {
-    map = L.map('stations', {scrollWheelZoom:true}).setView([29.53523, 24.60938], 2);
+    map = L.map('covid19-coverage', {scrollWheelZoom:true}).setView([29.53523, 24.60938], 2);
 
     var openstreetmap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +

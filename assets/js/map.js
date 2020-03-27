@@ -2,11 +2,11 @@ var rootEndpoint = "https://corona-stats.online/?format=json";
 var map;
 
 $( document ).ready(function() {  
-    initMap();
+    loadEntireMap();
 });
 
-function initMap() {
-    map = L.map('covid19-coverage', {scrollWheelZoom:true}).setView([29.53523, 24.60938], 3);
+function loadEntireMap() {
+    map = L.map('covid19-coverage', { scrollWheelZoom:true }).setView([29.53523, 24.60938], 3);
 
     var openstreetmap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -35,6 +35,9 @@ function initMap() {
         dataType: 'json',
         async: false,
         success: function(data) {
+            /**
+             * maps and layers 
+             */
             let countries = new L.LayerGroup();
             let heatRootPoints = new Array();
             let elements = data.data
@@ -97,15 +100,28 @@ function initMap() {
                 heatRootPoints.push(heatPoints);
             });
 
-            let heats = 
-                L.heatLayer(heatRootPoints, {
-                    radius: 35,
-                    blur: 35
-                }).addTo(map);    
-            
+            let heats = L.heatLayer(heatRootPoints, {radius: 35, blur: 35}).addTo(map);                
             countries.addTo(map);            
             overLayers['Heatmap Cases'] = heats;
             overLayers['Countries Coverage'] = countries;
+
+            /**
+             * world summary
+             */
+            let worldSummary = data.worldStats;
+            var worldSummaryTable = 
+                "<table class=\"table table-striped\"><tbody>" + 
+                    "<tr><th>World Cases</th><td>" + worldSummary.cases + "</td></tr>" +
+                    "<tr><th>World Cases Today</th><td>" + worldSummary.todayCases + "</td></tr>" +
+                    "<tr><th>World Deaths</th><td>" + worldSummary.deaths + "</td></tr>" +
+                    "<tr><th>World Deaths Today</th><td>" + worldSummary.todayDeaths + "</td></tr>" +
+                    "<tr><th>World Recovered Cases</th><td>" + worldSummary.recovered + "</td></tr>" +
+                    "<tr><th>World Active Cases</th><td>" + worldSummary.active + "</td></tr>" +
+                    "<tr><th>World Critical Cases</th><td>" + worldSummary.critical + "</td></tr>" +
+                    "<tr><th>World Confirmed Cases</th><td>" + worldSummary.confirmed + "</td></tr>" +
+                    "<tr><th>Current Date</th><td>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</td></tr>" +
+                "</tbody></table>"
+            $('#world-summary-content').html(worldSummaryTable);
         }
     });
 
@@ -114,4 +130,12 @@ function initMap() {
     L.control.scale().addTo(map);
 
     L.control.mousePosition().addTo(map);
+
+    // https://github.com/noerw/leaflet-sidebar-v2
+    L.control.sidebar({
+        autopan: false,   
+        closeButton: true,
+        container: 'sidebar',
+        position: 'left',
+    }).addTo(map);
 }

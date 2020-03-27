@@ -3,9 +3,11 @@
 <head>
     <title>COVID-19 Visualizer</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+    
     <link href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" rel="stylesheet"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <link rel="stylesheet" href="./assets/css/leaflet.label.css"/>
+    <link rel="stylesheet" href="./assets/css/leaflet-sidebar.min.css"/>
     <link rel="stylesheet" href="./assets/css/leaflet-control-mouse-position.css"/>
 
     <!--TABLE-->
@@ -16,12 +18,35 @@
 <body>
     <div id="covid19-coverage"></div>
 
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <ul role="tablist">
+                <li>
+                    <a href="#world-summary" role="tab"><i class="fa fa-bars"></i></a>
+                </li>
+            </ul>  
+        </div>
+
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="world-summary">
+                <h1 class="leaflet-sidebar-header">World Summary                    
+                    <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+                </h1>
+                <br/>
+                <div id="world-summary-content"></div>
+            </div>
+        </div>
+    </div>
+
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
     <script src="./assets/js/map.js" async></script>
     <script src="./assets/js/leaflet.label.js" async></script>
     <script src="./assets/js/leaflet-heat.js" async></script>
+    <script src="./assets/js/leaflet-sidebar.min.js" async></script>
     <script src="./assets/js/leaflet-control-mouse-position.js" async></script>
+    <script src="./assets/js/moment.js" async></script>
 
     <!--TABLE-->
     <script src="./assets/vendor/jquery/jquery-3.2.1.min.js"></script>

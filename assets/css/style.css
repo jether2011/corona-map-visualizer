@@ -93,3 +93,15 @@ footer p {
 }
 
 footer a { color:#108d6f;}
+
+/*
+MAPS
+*/
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #covid19-coverage {
+    height: 100%;
+    width: 100%;
+}
